@@ -81,11 +81,6 @@
             ],
             "left": [
                 {
-                    "icon": "rocket",
-                    "id": "Launcher",
-                    "usePrimaryColor": false
-                },
-                {
                     "customFont": "",
                     "formatHorizontal": "HH:mm ddd, MMM dd",
                     "formatVertical": "HH mm - dd MM",
@@ -177,8 +172,15 @@
                     "middleClickCommand": "pwvucontrol || pavucontrol"
                 },
                 {
+                    "defaultSettings": {
+                        "position": "Bottom"
+                    },
+                    "id": "plugin:clipper"
+                },
+                {
                     "displayMode": "onhover",
-                    "id": "Brightness"
+                    "id": "KeyboardLayout",
+                    "showIcon": true
                 },
                 {
                     "colorizeDistroLogo": false,
@@ -194,7 +196,7 @@
     },
     "brightness": {
         "brightnessStep": 5,
-        "enableDdcSupport": false,
+        "enableDdcSupport": true,
         "enforceMinimum": true
     },
     "calendar": {

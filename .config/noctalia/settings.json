@@ -37,11 +37,11 @@
         "autoHideDelay": 500,
         "autoShowDelay": 150,
         "backgroundOpacity": 0.93,
-        "barType": "simple",
+        "barType": "floating",
         "capsuleOpacity": 1,
         "density": "default",
         "displayMode": "always_visible",
-        "floating": false,
+        "floating": true,
         "frameRadius": 12,
         "frameThickness": 8,
         "hideOnOverview": false,
@@ -150,7 +150,8 @@
                     "hidePassive": false,
                     "id": "Tray",
                     "pinned": [
-                        "Discord"
+                        "Discord",
+                        "steam"
                     ]
                 },
                 {
@@ -218,7 +219,7 @@
         "manualSunrise": "06:30",
         "manualSunset": "18:30",
         "monitorForColors": "",
-        "predefinedScheme": "Tokyo Night",
+        "predefinedScheme": "Tokyo-Night",
         "schedulingMode": "off",
         "useWallpaperColors": false
     },
@@ -290,7 +291,7 @@
     },
     "dock": {
         "animationSpeed": 1,
-        "backgroundOpacity": 1,
+        "backgroundOpacity": 0.8,
         "colorizeIcons": false,
         "deadOpacity": 0.6,
         "displayMode": "auto_hide",
@@ -312,10 +313,10 @@
         "animationDisabled": false,
         "animationSpeed": 1,
         "autoStartAuth": false,
-        "avatarImage": "/home/fumo/.face",
+        "avatarImage": "/home/fumo/nixniridots/.config/niri/.face.jpg",
         "boxRadiusRatio": 1,
         "compactLockScreen": false,
-        "dimmerOpacity": 0.2,
+        "dimmerOpacity": 0.5,
         "enableLockScreenCountdown": true,
         "enableShadows": true,
         "forceBlackScreenCorners": false,
@@ -621,9 +622,9 @@
         "bluetoothDetailsViewMode": "grid",
         "bluetoothHideUnnamedDevices": false,
         "boxBorderEnabled": false,
-        "fontDefault": "Sans Serif",
+        "fontDefault": "DejaVu Sans",
         "fontDefaultScale": 1,
-        "fontFixed": "monospace",
+        "fontFixed": "DejaVu Sans Mono",
         "fontFixedScale": 1,
         "networkPanelView": "wifi",
         "panelBackgroundOpacity": 0.93,

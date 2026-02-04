@@ -5,7 +5,7 @@
 prefer-no-csd
 
 spawn-at-startup "noctalia-shell"
-spawn-at-startup "steam -silent"
+spawn-sh-at-startup "steam -silent"
 
 // Input device configuration.
 // Find the full list of options on the wiki:

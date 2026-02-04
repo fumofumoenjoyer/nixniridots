@@ -223,7 +223,7 @@
 
     # -- Core Tools --
     wget git micro unrar _7zz fuse fastfetch
-    vim neovim tealdeer p7zip xarchiver
+    vim neovim tealdeer p7zip xarchiver libva-utils
 
     # -- Gaming --
     mangohud goverlay lact vulkan-tools

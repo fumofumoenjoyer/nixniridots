@@ -209,6 +209,19 @@
   # ==========================================
 
   programs.firefox.enable = false;
+
+  programs.obs-studio = {
+  enable = true;
+  plugins = with pkgs.obs-studio-plugins; [
+    wlrobs
+    obs-backgroundremoval
+    obs-pipewire-audio-capture
+    obs-vaapi
+    obs-gstreamer
+    obs-vkcapture
+  ];
+};   
+
   environment.systemPackages = with pkgs; [
 
     # -- Niri --
@@ -239,9 +252,9 @@
     unstable.vscodium-fhs
 
     # -- Productivity & Media --
-    handbrake obs-studio onlyoffice-desktopeditors
+    handbrake onlyoffice-desktopeditors
     qbittorrent thunderbird
-    librewolf mpv audacious
+    librewolf mpv audacious resources
 
 
 

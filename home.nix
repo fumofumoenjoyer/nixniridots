@@ -11,7 +11,6 @@
   home.stateVersion = "25.11";
   home.packages = with pkgs; [
     brave
-    unstable.davinci-resolve
     
   ];
   
@@ -28,6 +27,8 @@
     }];
 
     packages = [
+      
+      "org.kde.kdenlive"
       "com.discordapp.Discord"
       "io.github.flattool.Warehouse"
       "org.prismlauncher.PrismLauncher"

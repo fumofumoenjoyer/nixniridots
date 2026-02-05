@@ -96,6 +96,30 @@
   # ==========================================
   # HARDWARE & GRAPHICS
   # ==========================================
+
+  #Nvidia GPU
+  #hardware.graphics = {
+  # enable = true;
+  #  enable32Bit = true; # Required for Steam/Wine
+  #  extraPackages = with pkgs; [
+  #    nvidia-vaapi-driver
+  #    unstable.lsfg-vk
+  #    vaapiVdpau
+  #    libvdpau-va-gl
+  #  ];
+  #};
+  #services.xserver.videoDrivers = ["nvidia"];
+  #hardware.nvidia = {
+  #  modesetting.enable = true;
+  #  powerManagement.enable = true;
+  #  powerManagement.finegrained = true;
+  #  open = true;
+  #  nvidiaSettings = true;
+  #  package = config.boot.kernelPackages.nvidiaPackages.stable;
+  #};
+
+
+  #AMD GPU
   hardware.graphics = {
     enable = true;
     enable32Bit = true; # Required for Steam/Wine
@@ -106,13 +130,15 @@
       ];
   };
 
+  #Bluetooth
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = true;
   services.blueman.enable = true;
 
+  #Power Profiles Daemon
   services.power-profiles-daemon.enable = true;
 
-  # AMD GPU Daemon (Overclocking/Fan control)
+  # GPU Daemon (Overclocking/Fan control)
   services.lact.enable = true;
 
   # Gaming Optimizations

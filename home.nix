@@ -12,6 +12,7 @@
   home.packages = with pkgs; [
     brave
     unstable.davinci-resolve
+    
   ];
   
   # ==========================================
@@ -69,13 +70,19 @@
     };
   };
 
-  programs.bash = {
+  programs.zsh = {
     enable = true;
-    shellAliases = {
-      btw = "echo i use nixos, btw";
-    };
-    profileExtra = ''
+    autosuggestion.enable = true;
+    syntaxHighlighting.enable = true;
 
+    oh-my-zsh = {
+      enable = true;
+      theme = "dpoggi";
+      plugins = [ "git" "sudo" ];
+    };
+
+    initExtra = ''
+      fastfetch
     '';
   };
 }

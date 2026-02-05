@@ -99,7 +99,11 @@
   hardware.graphics = {
     enable = true;
     enable32Bit = true; # Required for Steam/Wine
-    extraPackages = [ unstable.lsfg-vk ]; # Lossless Scaling for Linux
+    extraPackages = [
+      unstable.lsfg-vk
+      pkgs.mesa.opencl
+      pkgs.rocmPackages.clr.icd
+      ];
   };
 
   hardware.bluetooth.enable = true;
@@ -152,6 +156,7 @@
   users.users.fumo = {
     isNormalUser = true;
     description = "Fumo";
+    shell = pkgs.zsh;
     # 'libvirtd' for VMs, 'networkmanager' for wifi
     extraGroups = [ "networkmanager" "wheel" "libvirtd" ];
     packages = with pkgs; [
@@ -221,6 +226,9 @@
     obs-vkcapture
   ];
 };   
+programs.zsh = {
+  enable = true;
+};
 
   environment.systemPackages = with pkgs; [
 

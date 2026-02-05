@@ -1,4 +1,4 @@
-{ config, pkgs, nix-flatpak, ... }:
+{ config, pkgs, nix-flatpak, unstable, ... }:
 
 {
   imports = [
@@ -11,6 +11,7 @@
   home.stateVersion = "25.11";
   home.packages = with pkgs; [
     brave
+    unstable.davinci-resolve
   ];
   
   # ==========================================

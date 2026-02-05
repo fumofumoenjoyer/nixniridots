@@ -236,7 +236,7 @@
 
     # -- Core Tools --
     wget git micro unrar _7zz fuse fastfetch
-    vim neovim tealdeer p7zip xarchiver libva-utils
+    vim neovim tealdeer p7zip xarchiver libva-utils ffmpeg
 
     # -- Gaming --
     mangohud goverlay lact vulkan-tools
@@ -272,6 +272,12 @@
   };
 
   services.flatpak.enable = true;
+
+  # Dynamically linked executables
+  programs.nix-ld.enable = true;
+  programs.nix-ld.libraries = with pkgs; [
+    # Add missing libraries here, e.g. openssl, stdenv.cc.cc.lib
+  ];
 
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];

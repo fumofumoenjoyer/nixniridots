@@ -1,4 +1,4 @@
-{ config, pkgs, nix-flatpak, unstable, ... }:
+{ config, pkgs, nix-flatpak, unstable, lib, ... }:
 
 {
   imports = [
@@ -27,7 +27,7 @@
     }];
 
     packages = [
-      
+      "com.heroicgameslauncher.hgl"
       "org.kde.kdenlive"
       "com.discordapp.Discord"
       "io.github.flattool.Warehouse"
@@ -45,8 +45,14 @@
     ];
     update.auto = {
       enable = true;
-      onCalendar = "weekly";
+      onCalendar = "daily";
     };
+  };
+
+  home.activation = {
+    configureFlatpakLanguages = lib.hm.dag.entryAfter ["writeBoundary"] ''
+      ${pkgs.flatpak}/bin/flatpak config --user --set languages "en;ja"
+    '';
   };
 
   # ==========================================
@@ -60,6 +66,14 @@
   };
 
   home.file."Pictures/Wallpapers".source = config.lib.file.mkOutOfStoreSymlink /home/fumo/nixniridots/wallpapers;
+
+  gtk = {
+    enable = true;
+    iconTheme = {
+      package = pkgs.papirus-icon-theme;
+      name = "Papirus-Dark";
+    };
+  };
 
   programs.git = {
     enable = true;

@@ -124,12 +124,16 @@
     enable = true;
     enable32Bit = true; # Required for Steam/Wine
     extraPackages = [
+      pkgs.libva
+      pkgs.libva-vdpau-driver
+      pkgs.libvdpau-va-gl
       unstable.lsfg-vk
       pkgs.mesa.opencl
       pkgs.rocmPackages.clr.icd
       ];
   };
-
+  services.xserver.videoDrivers = [ "amdgpu" ];
+  
   #Bluetooth
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = true;
@@ -167,11 +171,12 @@
     extraPortals = with pkgs; [
       xdg-desktop-portal-gtk
       xdg-desktop-portal-gnome
+      xdg-desktop-portal-wlr
       gnome-keyring
     ];
     config.common = {
-      "org.freedesktop.impl.portal.FileChooser" = "gtk";
-      "org.freedesktop.impl.portal.ScreenCast" = "gnome";
+      "org.freedesktop.impl.portal.FileChooser" = "gnome";
+      "org.freedesktop.impl.portal.ScreenCast" = "wlr";
       "org.freedesktop.impl.portal.Secret" = "gnome-keyring";
     };
   };
@@ -241,20 +246,19 @@
 
   programs.firefox.enable = false;
 
+  programs.zsh = {
+    enable = true;
+  };
+
   programs.obs-studio = {
-  enable = true;
-  plugins = with pkgs.obs-studio-plugins; [
-    wlrobs
-    obs-backgroundremoval
-    obs-pipewire-audio-capture
-    obs-vaapi
-    obs-gstreamer
-    obs-vkcapture
-  ];
-};   
-programs.zsh = {
-  enable = true;
-};
+    enable = true;
+    plugins = with pkgs.obs-studio-plugins; [
+      obs-vaapi        # Optional: AMD VAAPI support
+      obs-gstreamer    # Recommended for better GStreamer-based encoding
+      obs-pipewire-audio-capture
+      obs-vkcapture
+    ];
+  }; 
 
   environment.systemPackages = with pkgs; [
 
@@ -275,7 +279,6 @@ programs.zsh = {
     # -- Gaming --
     mangohud goverlay lact vulkan-tools
     unstable.lsfg-vk-ui
-    unstable.heroic
 
     # -- Virtualization & Network --
     podman-compose rclone
@@ -310,8 +313,56 @@ programs.zsh = {
   # Dynamically linked executables
   programs.nix-ld.enable = true;
   programs.nix-ld.libraries = with pkgs; [
-    # Add missing libraries here, e.g. openssl, stdenv.cc.cc.lib
+
   ];
+
+  # ==========================================
+  # CUSTOM SERVICES
+  # ==========================================
+  systemd.services.rclone-mount-megas4crypt = {
+    description = "Rclone mount megas4crypt";
+    after = [ "network-online.target" ];
+    wants = [ "network-online.target" ];
+    wantedBy = [ "multi-user.target" ];
+    path = [ "/run/wrappers" pkgs.fuse pkgs.coreutils ];
+    
+    serviceConfig = {
+      Type = "simple";
+      User = "fumo";
+      Group = "users";
+      ExecStartPre = "${pkgs.coreutils}/bin/mkdir -p /home/fumo/megacrypt";
+      ExecStart = ''
+        ${pkgs.rclone}/bin/rclone mount megas4crypt: /home/fumo/megacrypt \
+          --config=/home/fumo/.config/rclone/rclone.conf \
+          --vfs-cache-mode full \
+          --vfs-cache-max-age 336h \
+          --vfs-cache-max-size 600G \
+          --vfs-cache-min-free-space 50G \
+          --vfs-write-back 5s \
+          --vfs-read-chunk-size 64M \
+          --vfs-read-chunk-size-limit 2G \
+          --buffer-size 128M \
+          --dir-cache-time 1000h \
+          --poll-interval 0 \
+          --vfs-disk-space-total-size 20T \
+          --tpslimit 40 \
+          --transfers 16 \
+          --s3-chunk-size 128M \
+          --s3-upload-cutoff 128M \
+          --bwlimit 38M \
+          --use-mmap \
+          --allow-other \
+          --async-read \
+          --rc
+      '';
+      ExecStop = "/run/wrappers/bin/fusermount -u /home/fumo/megacrypt";
+      Restart = "on-failure";
+      RestartSec = "10s";
+      Environment = [ "PATH=/run/wrappers/bin:/run/current-system/sw/bin" ];
+    };
+  };
+
+
 
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];

@@ -12,6 +12,7 @@
         "enableWindowsSearch": true,
         "iconMode": "tabler",
         "ignoreMouseInput": false,
+        "overviewLayer": false,
         "pinnedApps": [
         ],
         "position": "center",
@@ -337,7 +338,10 @@
         "iRadiusRatio": 1,
         "language": "en",
         "lockOnSuspend": true,
+        "lockScreenAnimations": false,
         "lockScreenCountdownDuration": 10000,
+        "lockScreenMonitors": [
+        ],
         "radiusRatio": 1,
         "scaleRatio": 1,
         "screenRadiusRatio": 1,

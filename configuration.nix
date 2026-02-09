@@ -319,48 +319,7 @@
   # ==========================================
   # CUSTOM SERVICES
   # ==========================================
-  systemd.services.rclone-mount-megas4crypt = {
-    description = "Rclone mount megas4crypt";
-    after = [ "network-online.target" ];
-    wants = [ "network-online.target" ];
-    wantedBy = [ "multi-user.target" ];
-    path = [ "/run/wrappers" pkgs.fuse pkgs.coreutils ];
-    
-    serviceConfig = {
-      Type = "simple";
-      User = "fumo";
-      Group = "users";
-      ExecStartPre = "${pkgs.coreutils}/bin/mkdir -p /home/fumo/megacrypt";
-      ExecStart = ''
-        ${pkgs.rclone}/bin/rclone mount megas4crypt: /home/fumo/megacrypt \
-          --config=/home/fumo/.config/rclone/rclone.conf \
-          --vfs-cache-mode full \
-          --vfs-cache-max-age 336h \
-          --vfs-cache-max-size 600G \
-          --vfs-cache-min-free-space 50G \
-          --vfs-write-back 5s \
-          --vfs-read-chunk-size 64M \
-          --vfs-read-chunk-size-limit 2G \
-          --buffer-size 128M \
-          --dir-cache-time 1000h \
-          --poll-interval 0 \
-          --vfs-disk-space-total-size 20T \
-          --tpslimit 40 \
-          --transfers 16 \
-          --s3-chunk-size 128M \
-          --s3-upload-cutoff 128M \
-          --bwlimit 38M \
-          --use-mmap \
-          --allow-other \
-          --async-read \
-          --rc
-      '';
-      ExecStop = "/run/wrappers/bin/fusermount -u /home/fumo/megacrypt";
-      Restart = "on-failure";
-      RestartSec = "10s";
-      Environment = [ "PATH=/run/wrappers/bin:/run/current-system/sw/bin" ];
-    };
-  };
+  
 
 
 

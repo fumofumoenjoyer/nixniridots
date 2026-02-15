@@ -27,7 +27,7 @@
     }];
 
     packages = [
-      "io.github.prateekmedia.appimagepool"
+      "it.mijorus.gearlever"
       "com.heroicgameslauncher.hgl"
       "org.kde.kdenlive"
       "com.discordapp.Discord"

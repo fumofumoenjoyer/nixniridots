@@ -1,4 +1,4 @@
-# nix dotfiles
+# nix niri dotfiles
 ## Actualizar
 ```
 cd nix-dotfiles
@@ -174,3 +174,4 @@ Una vez dentro de tu nuevo sistema ZFS, añade esto a tu `configuration.nix` par
   services.zfs.trim.enable = true;      # Mantiene el SSD rápido
 
 ```
+

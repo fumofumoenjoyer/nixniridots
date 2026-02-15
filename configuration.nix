@@ -273,7 +273,7 @@
     gthumb
 
     # -- Core Tools --
-    wget git micro unrar _7zz fuse fastfetch
+    wget git micro appimage-run unrar _7zz fuse fastfetch
     vim neovim tealdeer p7zip xarchiver libva-utils ffmpeg
 
     # -- Gaming --

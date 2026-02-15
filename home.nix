@@ -27,7 +27,7 @@
     }];
 
     packages = [
-      "it.mijorus.gearlever"
+      "net.shadps4.shadPS4"
       "com.heroicgameslauncher.hgl"
       "org.kde.kdenlive"
       "com.discordapp.Discord"

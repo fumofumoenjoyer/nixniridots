@@ -11,8 +11,8 @@
   # ==========================================
 
   boot = {
-    # Using LTS kernel on Unstable channel for better hardware support + ZFS compatibility
-    kernelPackages = unstable.linuxPackages;
+    # Using LTS kernel for ZFS compatibility
+    kernelPackages = pkgs.linuxPackages;
 
     # Required for ZFS root
     supportedFilesystems = [ "zfs" ];
